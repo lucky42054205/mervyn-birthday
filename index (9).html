@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b1055">
+<title>Happy Birthday Mervyn 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff6fb5; --gold:#ffd166; --violet:#7b2ff7; --deep:#2b1055;
+    --card:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;
+    color:#fff;
+    background:linear-gradient(135deg,#2b1055,#7b2ff7,#ff6fb5,#2b1055);
+    background-size:400% 400%;
+    animation:bg 18s ease infinite;
+    overflow-x:hidden;
+    min-height:100dvh;
+  }
+  @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+  #floaters{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+  .floater{position:absolute;bottom:-60px;font-size:28px;opacity:.85;animation:rise linear forwards}
+  @keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+
+  /* Splash */
+  #splash{
+    position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:24px;
+    background:radial-gradient(circle at 50% 40%,#4a1a9c,#1a0836);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  #splash.hide{opacity:0;transform:scale(1.15);pointer-events:none}
+  .gift{font-size:96px;animation:bounce 1.4s ease-in-out infinite;filter:drop-shadow(0 10px 25px rgba(255,111,181,.6))}
+  @keyframes bounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-22px) rotate(4deg)}}
+  #splash h2{font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(26px,8vw,38px);margin:18px 0 6px}
+  #splash p{opacity:.8;font-weight:300;margin-bottom:26px}
+  .btn{
+    border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:16px;color:#2b1055;
+    background:linear-gradient(135deg,var(--gold),#ff9a76);padding:14px 34px;border-radius:50px;
+    box-shadow:0 8px 25px rgba(255,209,102,.45);animation:pulse 1.8s infinite;
+  }
+  .btn:active{transform:scale(.95)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,209,102,.6)}70%{box-shadow:0 0 0 22px rgba(255,209,102,0)}100%{box-shadow:0 0 0 0 rgba(255,209,102,0)}}
+
+  /* Main */
+  main{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 20px max(40px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:28px}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  .hero{text-align:center;padding-top:10px}
+  .hero .small{letter-spacing:4px;font-size:12px;text-transform:uppercase;opacity:.8}
+  .hero h1{
+    font-family:'Pacifico',cursive;font-weight:400;font-size:clamp(34px,11vw,56px);line-height:1.2;margin:8px 0;
+    background:linear-gradient(90deg,#fff,var(--gold),var(--pink),#fff);background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 4s linear infinite;
+  }
+  @keyframes shine{to{background-position:200% center}}
+  .name{
+    font-family:'Pacifico',cursive;font-size:clamp(44px,15vw,76px);color:var(--gold);
+    text-shadow:0 0 25px rgba(255,209,102,.7);min-height:1.3em;
+  }
+  .name .cursor{display:inline-block;width:3px;background:var(--gold);margin-left:4px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* Cake */
+  .cake-wrap{text-align:center}
+  .cake-wrap p{font-size:14px;opacity:.85;margin-top:6px}
+  svg.cake{width:min(78vw,300px);height:auto;cursor:pointer;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35))}
+  .flame{transform-origin:center bottom;animation:flicker .35s ease-in-out infinite alternate;transform-box:fill-box}
+  @keyframes flicker{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15,1.25) rotate(3deg)}}
+  .out .flame{display:none}
+  .smoke{opacity:0}
+  .out .smoke{animation:smoke 1.8s ease-out forwards}
+  @keyframes smoke{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translateY(-30px)}}
+
+  /* Message card */
+  .card{
+    width:100%;background:var(--card);border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-radius:26px;padding:28px 24px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25);
+  }
+  .card .big{font-family:'Pacifico',cursive;font-size:26px;color:var(--gold);margin-bottom:12px}
+  .card p{font-size:17px;line-height:1.75;font-weight:300}
+  .card .sign{margin-top:22px;font-size:15px;opacity:.9}
+  .card .sign b{font-family:'Pacifico',cursive;font-weight:400;font-size:24px;color:var(--pink);display:block;margin-top:4px}
+
+  /* Wish chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:40px;font-size:14px;animation:float 3.5s ease-in-out infinite}
+  .chip:nth-child(2){animation-delay:.5s}.chip:nth-child(3){animation-delay:1s}
+  .chip:nth-child(4){animation-delay:1.5s}.chip:nth-child(5){animation-delay:2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+  .again{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff;animation:none;box-shadow:none;font-weight:400}
+  footer{font-size:13px;opacity:.7;text-align:center;padding-top:6px}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+<div id="floaters"></div>
+
+<div id="splash">
+  <div class="gift">🎁</div>
+  <h2>Mervyn, ek surprise hai...</h2>
+  <p>Monika ne tumhare liye kuch bheja hai ✨</p>
+  <button class="btn" id="openBtn">Tap to Open 🎉</button>
+</div>
+
+<main id="main">
+  <section class="hero reveal">
+    <div class="small">✨ it's your special day ✨</div>
+    <h1>Happy Birthday</h1>
+    <div class="name"><span id="typed"></span><span class="cursor">&nbsp;</span></div>
+  </section>
+
+  <section class="cake-wrap reveal">
+    <svg class="cake" id="cake" viewBox="0 0 300 300" aria-label="Birthday cake, tap to blow the candles">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff9ccf"/><stop offset="1" stop-color="#ff5fa8"/></linearGradient>
+        <linearGradient id="g2" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffe3a3"/><stop offset="1" stop-color="#ffb347"/></linearGradient>
+        <radialGradient id="fl" cx=".5" cy=".7" r=".6"><stop offset="0" stop-color="#fff7c2"/><stop offset=".6" stop-color="#ffb703"/><stop offset="1" stop-color="#ff5400"/></radialGradient>
+      </defs>
+      <ellipse cx="150" cy="285" rx="130" ry="10" fill="rgba(0,0,0,.25)"/>
+      <!-- plate -->
+      <ellipse cx="150" cy="268" rx="135" ry="16" fill="#fff" opacity=".9"/>
+      <!-- bottom tier -->
+      <rect x="40" y="190" width="220" height="78" rx="16" fill="url(#g2)"/>
+      <path d="M40 205 q18 22 36 0 t36 0 t36 0 t36 0 t36 0 t40 0 v-15 h-220z" fill="#fff"/>
+      <!-- top tier -->
+      <rect x="72" y="130" width="156" height="64" rx="14" fill="url(#g1)"/>
+      <path d="M72 144 q15 20 30 0 t30 0 t30 0 t30 0 t36 0 v-14 h-156z" fill="#fff"/>
+      <circle cx="105" cy="170" r="5" fill="#ffd166"/><circle cx="150" cy="176" r="5" fill="#fff"/><circle cx="195" cy="170" r="5" fill="#ffd166"/>
+      <circle cx="80" cy="235" r="6" fill="#ff6fb5"/><circle cx="150" cy="240" r="6" fill="#7b2ff7"/><circle cx="220" cy="235" r="6" fill="#ff6fb5"/>
+      <!-- candles -->
+      <g>
+        <rect x="105" y="98" width="10" height="34" rx="3" fill="#6ec1ff"/>
+        <rect x="145" y="98" width="10" height="34" rx="3" fill="#ffd166"/>
+        <rect x="185" y="98" width="10" height="34" rx="3" fill="#8bf0a2"/>
+        <path class="flame" d="M110 70 q-9 14 0 26 q9 -12 0 -26z" fill="url(#fl)"/>
+        <path class="flame" d="M150 70 q-9 14 0 26 q9 -12 0 -26z" fill="url(#fl)" style="animation-delay:.1s"/>
+        <path class="flame" d="M190 70 q-9 14 0 26 q9 -12 0 -26z" fill="url(#fl)" style="animation-delay:.2s"/>
+        <g class="smoke" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <path d="M110 92 q-5 -10 0 -18"/><path d="M150 92 q5 -10 0 -18"/><path d="M190 92 q-5 -10 0 -18"/>
+        </g>
+      </g>
+    </svg>
+    <p id="cakeHint">👆 Cake pe tap karo, candles bujhao &amp; wish maango!</p>
+  </section>
+
+  <section class="card reveal">
+    <div class="big">For you, Mervyn 💌</div>
+    <p>Happy Birthday! Wishing you good health, happiness, peace and countless blessings. May you always stay healthy, happy and surrounded by love. Have a wonderful year ahead! ❤️🎂</p>
+    <div class="sign">With lots of love,<b>~ Monika</b></div>
+  </section>
+
+  <section class="chips reveal">
+    <span class="chip">🌟 Good Health</span>
+    <span class="chip">😊 Happiness</span>
+    <span class="chip">🕊️ Peace</span>
+    <span class="chip">🙏 Blessings</span>
+    <span class="chip">❤️ Love</span>
+  </section>
+
+  <section class="reveal" style="text-align:center">
+    <button class="btn again" id="partyBtn">🎊 Party again!</button>
+  </section>
+
+  <footer class="reveal">Made with ❤️ by Monika for Mervyn</footer>
+</main>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+
+  /* ---------- Confetti ---------- */
+  const cv = $('#confetti'), ctx = cv.getContext('2d');
+  let W, H, pieces = [], running = false;
+  function resize(){
+    const d = window.devicePixelRatio || 1;
+    W = cv.width = innerWidth * d; H = cv.height = innerHeight * d;
+    ctx.setTransform(1,0,0,1,0,0); ctx.scale(d,d);
+  }
+  addEventListener('resize', resize); resize();
+  const colors = ['#ff6fb5','#ffd166','#7b2ff7','#6ec1ff','#8bf0a2','#ffffff','#ff9a76'];
+  function burst(n, x, y){
+    for(let i=0;i<n;i++){
+      pieces.push({
+        x: x ?? Math.random()*innerWidth, y: y ?? -20,
+        vx: (Math.random()-.5)*(y!=null?10:4), vy: y!=null ? -Math.random()*12-3 : Math.random()*3+2,
+        s: Math.random()*8+5, r: Math.random()*6, vr:(Math.random()-.5)*.3,
+        c: colors[(Math.random()*colors.length)|0], shape: Math.random()<.5 ? 'r':'c', life: 0
+      });
+    }
+    if(!running){ running = true; requestAnimationFrame(tick); }
+  }
+  function tick(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    pieces.forEach(p=>{
+      p.vy += .12; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+      if(p.shape==='r') ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);
+      else { ctx.beginPath(); ctx.arc(0,0,p.s/3,0,7); ctx.fill(); }
+      ctx.restore();
+    });
+    pieces = pieces.filter(p => p.y < innerHeight + 30);
+    if(pieces.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0,0,innerWidth,innerHeight); }
+  }
+  function bigParty(){
+    burst(140);
+    burst(60, innerWidth*.1, innerHeight*.8);
+    burst(60, innerWidth*.9, innerHeight*.8);
+  }
+
+  /* ---------- Floating emojis ---------- */
+  const fl = $('#floaters');
+  const emojis = ['🎈','❤️','✨','🎉','🎂','🌟','💖','🎁','🎊'];
+  function spawn(){
+    const e = document.createElement('div');
+    e.className = 'floater';
+    e.textContent = emojis[(Math.random()*emojis.length)|0];
+    e.style.left = Math.random()*95 + 'vw';
+    e.style.fontSize = (20 + Math.random()*26) + 'px';
+    e.style.animationDuration = (7 + Math.random()*7) + 's';
+    fl.appendChild(e);
+    setTimeout(()=>e.remove(), 15000);
+  }
+  let floatTimer;
+
+  /* ---------- Typewriter ---------- */
+  function typeName(){
+    const t = 'Mervyn 🎉', el = $('#typed'); el.textContent = '';
+    let i = 0;
+    const iv = setInterval(()=>{ el.textContent = Array.from(t).slice(0,++i).join(''); if(i>=Array.from(t).length) clearInterval(iv); }, 160);
+  }
+
+  /* ---------- Open ---------- */
+  $('#openBtn').addEventListener('click', ()=>{
+    $('#splash').classList.add('hide');
+    setTimeout(()=> $('#splash').remove(), 900);
+    bigParty();
+    typeName();
+    document.querySelectorAll('.reveal').forEach((el,i)=> setTimeout(()=>el.classList.add('show'), 300 + i*450));
+    floatTimer = setInterval(spawn, 700);
+    for(let i=0;i<6;i++) setTimeout(spawn, i*150);
+  });
+
+  /* ---------- Cake ---------- */
+  const cake = $('#cake');
+  cake.addEventListener('click', ()=>{
+    const out = cake.classList.toggle('out');
+    const hint = $('#cakeHint');
+    if(out){
+      hint.innerHTML = '🌠 Wish maang liya? Ab sab pura hoga, Mervyn! 🎉';
+      burst(120, innerWidth/2, innerHeight*.45);
+      if(navigator.vibrate) navigator.vibrate(60);
+    } else {
+      hint.innerHTML = '🕯️ Candles phir se jala di! Dobara bujhao 😄';
+    }
+  });
+
+  $('#partyBtn').addEventListener('click', bigParty);
+
+  /* Tap anywhere on the page for a small burst */
+  document.addEventListener('touchstart', e=>{
+    if(e.target.closest('button,svg')) return;
+    const t = e.touches[0]; burst(25, t.clientX, t.clientY);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
